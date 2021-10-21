@@ -1,8 +1,12 @@
 import React from 'react';
-import {View, Text, Image, TouchableOpacity, Pressable} from "react-native";
-import {AntDesign} from '@expo/vector-icons'
+import {Button,View, Text, Image, TouchableOpacity, Pressable} from "react-native";
+import {AntDesign} from '@expo/vector-icons';
+import {CreateAppContainer} from 'react-navigation';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/stack';
 
-export default function Login(){ 
+export default function Login({navigation}){ 
+    
     return <View style={{ flex:1 ,justifyContent: 'center',alignItems:'center'}}>
     <Image style={{
         
@@ -35,13 +39,14 @@ export default function Login(){
 
                  }}>
                  <AntDesign name="google" size={24} color="black" />
-                 <Text style={{fontSize:17, marginLeft: 15,}}>Login With Gmail</Text>
+                 <Text onPress={() => {
+                 navigation.navigate("Home") 
+             }} style={{fontSize:17, marginLeft: 15,}}>Login With Gmail</Text>
                  
              </TouchableOpacity>
              
-             <TouchableOpacity onPress={() => {
-                 navigation.navigate("Home")
-             }}
+             
+             <TouchableOpacity 
              
              style={{
                  backgroundColor:'black',
@@ -56,7 +61,7 @@ export default function Login(){
              <AntDesign name="apple1" size={24} color="white" />
                   <Text style={{fontSize:17, color: 'white',marginLeft:15}}>Login With Apple</Text>
              </TouchableOpacity>
-            
+             
          </Text>
          <Text style={{marginTop:10, color: "grey"}}>Not a Member? <Text style={{color: "orange", fontWeight:'bold'}}>Sign Up</Text></Text>
     </View>

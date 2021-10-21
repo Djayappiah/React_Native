@@ -55,7 +55,7 @@ const BicycleCard = () => {
 						$
 					</Text>
 					<Text style={tailwind("text-black font-bold text-xl")}>
-						1,200.00
+						1,000.00
 					</Text>
 				</View>
 			</View>
