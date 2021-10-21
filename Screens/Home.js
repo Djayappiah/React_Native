@@ -5,6 +5,7 @@ import tailwind from "tailwind-rn";
 import IonIcon from "react-native-vector-icons/Ionicons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import AntDesign from "react-native-vector-icons/AntDesign";
+import { NavigationContainer } from "@react-navigation/native";
 
 const data = [
 	{ title: "All" },
@@ -42,19 +43,20 @@ const BicycleCard = () => {
 					<AntDesign name="hearto" color="orange" />
 				</View>
 			</View>
-			<Image
+			<Image 
 				source={require("../Images/bicycle.png")}
 				style={tailwind("w-36 h-36")}
 			/>
 			<View style={tailwind("mt-3 items-center")}>
-				<Text style={tailwind("text-gray-400 text-xl")}>
+				<Text 
+				 style={tailwind("text-gray-400 text-xl")}>
 					Mountain Bike
 				</Text>
 				<View style={tailwind("flex flex-row")}>
 					<Text style={tailwind("text-yellow-500 font-bold text-xl")}>
 						$
 					</Text>
-					<Text style={tailwind("text-black font-bold text-xl")}>
+					<Text   style={tailwind("text-black font-bold text-xl")}>
 						1,000.00
 					</Text>
 				</View>
@@ -63,7 +65,7 @@ const BicycleCard = () => {
 	);
 };
 
-export default function Home() {
+export default function Home({navigation}) {
 	return (
 		<SafeAreaView style={tailwind("h-full w-full flex bg-white")}>
 			<View style={tailwind("px-4")}>
@@ -80,7 +82,10 @@ export default function Home() {
 					</View>
 				</View>
 				<View style={tailwind("mt-3 flex flex-row items-end")}>
-					<Text style={tailwind("text-gray-500 text-2xl")}>
+					<Text onPress={() => {
+						navigation.navigate("Cart")
+					}}
+					 style={tailwind("text-gray-500 text-2xl")}>
 						The World's
 					</Text>
 					<Text

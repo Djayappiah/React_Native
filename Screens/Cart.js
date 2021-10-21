@@ -160,7 +160,7 @@ const BicycleCard = () => {
 	);
 };
 
-export default function Cart() {
+export default function Cart({navigation}) {
 	return (
 		<SafeAreaView style={tailwind("h-full w-full flex bg-white")}>
 			<View style={tailwind("px-4")}>
