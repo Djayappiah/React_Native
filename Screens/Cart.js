@@ -1,205 +1,163 @@
-import React, { useState } from "react";
-import {Text,View,SafeAreaView,Image,TouchableOpacity,} from "react-native";
-import tailwind from "tailwind-rn";
-import IonIcon from "react-native-vector-icons/Ionicons";
+import React from 'react'
+import {
+  View,
+  Text,
+  FlatList,
+  TouchableOpacity,
+  Pressable,
+  Image,
+  StyleSheet,
+ SafeAreaView,
+ ScrollView,
+ StatusBar
+} from "react-native";
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Feather } from '@expo/vector-icons';
+import { Ionicons } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
+import { NavigationContainer } from "@react-navigation/native";
+import { Foundation } from "@expo/vector-icons";
+import { Entypo } from '@expo/vector-icons';
+import { SimpleLineIcons } from '@expo/vector-icons';
+import { EvilIcons } from '@expo/vector-icons';
+import { FontAwesome5 } from '@expo/vector-icons';
 
-const Subtotal = () => {
-	return (
-		<View style={tailwind("bg-gray-100 rounded-xl mt-8 flex flex-col p-4")}>
-			<View style={tailwind("flex flex-row justify-between")}>
-				<Text style={tailwind("text-gray-400 font-bold text-lg")}>
-					Subtotal
-				</Text>
-				<View style={tailwind("flex flex-row items-center")}>
-					<Text style={tailwind("text-yellow-500 font-bold text-lg")}>
-						$
-					</Text>
-					<Text style={tailwind("text-black font-bold text-xl")}>
-						{" "}
-						3,400.00
-					</Text>
-				</View>
-			</View>
-			<View style={tailwind("flex flex-row justify-between mt-3")}>
-				<Text style={tailwind("text-gray-400 font-bold text-lg")}>
-					Shipping
-				</Text>
-				<View style={tailwind("flex flex-row items-center")}>
-					<Text style={tailwind("text-yellow-500 font-bold text-lg")}>
-						$
-					</Text>
-					<Text style={tailwind("text-black font-bold text-xl")}>
-						{" "}
-						400.00
-					</Text>
-				</View>
-			</View>
-			<View
-				style={[{ height: 1, overflow: "hidden", marginVertical: 15 }]}
-			>
-				<View
-					style={[
-						{
-							height: 2,
-							borderWidth: 1,
-							borderColor: "black",
-							borderStyle: "dashed",
-						},
-					]}
-				></View>
-			</View>
-			<View style={tailwind("flex flex-row justify-between")}>
-				<Text style={tailwind("text-gray-400 font-bold text-lg")}>
-					Total
-				</Text>
-				<View style={tailwind("flex flex-row items-center")}>
-					<Text style={tailwind("text-yellow-500 font-bold text-lg")}>
-						$
-					</Text>
-					<Text style={tailwind("text-black font-bold text-xl")}>
-						{" "}
-						3,800.00
-					</Text>
-				</View>
-			</View>
-		</View>
-	);
-};
+export default function Cart({navigation}){
 
-const BicycleCard = () => {
-	const [amount, setAmount] = useState(1);
+    const CartItem = (props) => {
+        
+    return (
+            <View style={{flexDirection:'row'}}>
 
-	return (
-		<View
-			style={{
-				...tailwind("rounded-xl flex flex-row items-center mb-4"),
-			}}
-		>
-			<View
-				style={tailwind(
-					"flex flex-row justify-between rounded-lg w-full"
-				)}
-			>
-				<View style={tailwind("flex flex-row")}>
-					<View style={tailwind("bg-gray-100 rounded-xl p-2")}>
-						<Image
-							source={require("../Images/bicycle.png")}
-							style={tailwind("w-20 h-20")}
-						/>
-					</View>
+            <Image 
+            style={{
+                padding:10,
+                backgroundColor:'rgb(224,224,224)',
+                width:100, 
+                height:70, 
+                marginLeft: 10,
+                marginTop:40,
+                borderRadius:10
+                }}
 
-					<View
-						style={tailwind("flex flex-col justify-between ml-5")}
-					>
-						<Text style={tailwind("text-black text-xl")}>
-							Pinarello Bike
-						</Text>
-						<Text style={tailwind("text-gray-400 text-sm")}>
-							Mountain Bike
-						</Text>
-						<View style={tailwind("flex flex-row")}>
-							<Text
-								style={tailwind(
-									"text-yellow-500 font-bold text-xl"
-								)}
-							>
-								$
-							</Text>
-							<Text
-								style={tailwind(
-									"text-black font-bold text-2xl"
-								)}
-							>
-								{" "}
-								{Number(amount * 1200).toFixed(2)}
-							</Text>
-						</View>
-					</View>
-				</View>
+            source={{uri:props.image}}
+            />
 
-				<View
-					style={tailwind("flex flex-col justify-between items-end")}
-				>
-					<IonIcon name="ios-trash" color="orange" size={20} />
-					<View style={tailwind("flex flex-row items-center")}>
-						<TouchableOpacity
-							style={tailwind(
-								"bg-black rounded-full p-1 w-8 h-8 flex justify-center items-center"
-							)}
-							onPress={() => {
-								if (amount > 0) setAmount(amount - 1);
-							}}
-						>
-							<Text style={tailwind("text-white font-bold")}>
-								-
-							</Text>
-						</TouchableOpacity>
-						<Text
-							style={tailwind(
-								"text-black font-bold text-2xl mx-3"
-							)}
-						>
-							{amount}
-						</Text>
-						<TouchableOpacity
-							style={tailwind(
-								"bg-yellow-500 rounded-full p-1 w-8 h-8 flex justify-center items-center"
-							)}
-							onPress={() => {
-								setAmount(amount + 1);
-							}}
-						>
-							<Text style={tailwind("text-white font-bold")}>
-								+
-							</Text>
-						</TouchableOpacity>
-					</View>
-				</View>
-			</View>
-		</View>
-	);
-};
+            
+            <View style={{flexDirection:'column'}}>
 
-export default function Cart({navigation}) {
-	return (
-		<SafeAreaView style={tailwind("h-full w-full flex bg-white")}>
-			<View style={tailwind("px-4")}>
-				<View
-					style={tailwind(
-						"flex flex-row justify-between items-center"
-					)}
-				>
-					<IonIcon name="ios-arrow-back-outline" size={30} />
-					<View style={tailwind("flex flex-col items-center")}>
-						<Text style={tailwind("text-xl font-bold")}>
-							Cart list
-						</Text>
-						<Text
-							style={tailwind("text-sm font-bold text-gray-400")}
-						>
-							(3 items)
-						</Text>
-					</View>
-					<View style={tailwind("flex flex-row")}>
-						<Text style={tailwind("text-white")}>BLANK</Text>
-					</View>
-				</View>
-				<View style={tailwind("mt-8 flex flex-col")}>
-					<BicycleCard />
-					<BicycleCard />
-					<BicycleCard />
-				</View>
-				<Subtotal />
-				<TouchableOpacity
-					style={tailwind(
-						"bg-yellow-500 mt-4 p-4 rounded-xl items-center"
-					)}
-				>
-					<Text style={tailwind("text-white font-bold text-xl")}>
-						Proceed to Checkout
-					</Text>
-				</TouchableOpacity>
-			</View>
-		</SafeAreaView>
-	);
+            
+            <Text style={{marginTop:50, marginLeft:15, fontWeight:'bold', fontSize:20}}>{props.title}</Text>
+            <Text style={{marginTop:10, marginLeft:20}}>{props.description}</Text>
+        <Text style={{marginTop:10, marginLeft:20, color:"orange"}}>$<Text style={{color:"black", fontSize:20, fontWeight:'bold'}}>{props.price}</Text></Text>
+                
+            </View>
+
+            <View style={{flexDirection:'column'}}>
+            <EvilIcons name="trash" size={24} color="rgb(204,102,0)"  style={{marginTop:50, marginLeft:70}}/>
+
+            <View style={{flexDirection:"row"}}>
+            <TouchableOpacity>
+            <AntDesign name="minuscircle" size={24} color="black" style={{marginTop:30}} />
+            </TouchableOpacity>
+            <Text style={{marginTop:30, marginLeft:20, fontWeight:'bold', fontSize:20}}>1</Text>
+            <TouchableOpacity>
+            <AntDesign name="pluscircle" size={24} color="rgb(204,102,0)" style={{marginTop:29, marginLeft:20}} />
+            </TouchableOpacity>
+            </View>
+        </View>
+        </View>
+       
+
+      
+    )}
+
+{/**TOP NAV BAR */}
+    const {goBack} = navigation;
+    return (
+        
+        
+        <View style={{fflex:1}}>
+    <View style={{marginTop:70, marginLeft:20, flexDirection:'row'}}>
+        <TouchableOpacity onPress= {()=>goBack()
+        }>
+        <Feather name="arrow-left" size={24} color="black" />
+        </TouchableOpacity>
+
+        <View style={{flexDirection:'column'}}>
+        <Text style={{
+            marginLeft:120,
+            fontSize:24,
+            fontWeight:"bold"
+        }}>
+            Cart List
+        </Text>
+        <Text style={{marginLeft:130}}>(3 items)</Text>
+       
+        </View>
+
+        
+         
+    </View>
+
+    <View>
+    <CartItem description="Buzanga Bike" price="800.00" title="Amazon Seeker" 
+		image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyKDrxmJGY-O-ivwgmIMjsqMBCW_RiGNzanA&usqp=CAU		
+"		
+	/>
+    <CartItem description="Black Monster" price="2,00.00" title="Splendid display" 
+		image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQW0fULvS3OzN6-KnHxAtCSS-Mjd45pvoZhiw&usqp=CAU"			
+		
+	/>
+    <CartItem description="Chioo Bike" price="1,100.00" title="Super friendzyy" 
+	
+	image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaWwAJoZznKrWlUNZ6FrvnvKCkYe4okZGJpw&usqp=CAU"			
+	/>
+
+    </View>
+
+   <View style={{margin:4, borderRadius:30, padding:50, backgroundColor:"rgb(160,160,160)", alignItems:"center",justifyContent:"space-between", flexDirection:"row"}}>
+   <Text style={{justifyContent:"space-between", fontSize:20, color:"grey"}}>Sub-Total </Text>
+   <Text style={{justifyContent:"space-between",  fontSize:25}}>$3900.00</Text>
+   </View>
+   
+        {/** PROCEED TO CHECKOUT BUTTON */}
+        <TouchableOpacity>
+        <View style={{backgroundColor:"rgb(204,102,0)", padding:20, margin:5, borderRadius:15}}>
+        <Text style={{marginTop:0, fontWeight:'bold', color:"white", textAlign:'center', fontSize:17}}>Proceed to Checkout</Text>
+        
+        </View>
+        </TouchableOpacity>
+
+        {/** BOTTOM NAV BAR */}
+        <View style={{backgroundColor:'rgb(224,224,224)',width:1000,height:80, bottom:0}}>
+    <View style={{flexDirection:"row"}}>
+
+    <TouchableOpacity onPress={()=>{
+        navigation.navigate("Home")
+    }}>
+    <Ionicons name="home-outline" size={30} color="black" style={{marginTop:20, marginLeft:30}} />
+</TouchableOpacity>
+        <FontAwesome name="microphone" size={30} color="white" style={{
+        marginBottom:0,
+         marginLeft:120,
+         backgroundColor:"black",
+         padding:17,
+         borderRadius:27,
+         borderColor:"black",
+         borderWidth:1,
+         overflow:'hidden'
+         }}/>
+            <TouchableOpacity>
+         <FontAwesome5 name="shopping-bag" size={24} color="orange"  style={{marginLeft:120, marginTop:20}} />
+        </TouchableOpacity>
+    </View>
+    
+        
+    </View> 
+    
+    
+    </View>
+    )
 }
